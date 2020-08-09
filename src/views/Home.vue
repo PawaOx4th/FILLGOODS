@@ -2,7 +2,7 @@
   <div id="home-page" class="home">
     <Layout>
       <Header class="navber"><Navber /></Header>
-      <Content>Content</Content>
+      <Content class="content"> <Member /></Content>
       <Footer>Footer</Footer>
     </Layout>
   </div>
@@ -12,7 +12,8 @@
 export default {
   name: "home-page",
   components: {
-    Navber: () => import("@/components/Navber.vue")
+    Navber: () => import("@/components/Navber.vue"),
+    Member: () => import("@/views/Member.vue")
   },
   data() {
     return {
@@ -30,5 +31,10 @@ export default {
   background-color: #1a936f;
   width: 100%;
   padding: 0 0;
+}
+
+.content {
+  min-height: calc(100vh * 0.87);
+  min-width: 100%;
 }
 </style>

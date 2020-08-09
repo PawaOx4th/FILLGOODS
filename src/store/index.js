@@ -14,6 +14,11 @@ export default new Vuex.Store({
     //   send email user
     getProfileEmail(state) {
       return state.Profile.email;
+    },
+
+    // SEND  Members
+    getMembers(state) {
+      return state.Users;
     }
   },
   mutations: {
