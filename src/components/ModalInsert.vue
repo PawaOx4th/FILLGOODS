@@ -12,26 +12,35 @@
     <Modal v-model="modal1" title="" :footer-hide="footerHide">
       <!--  -->
       <br />
-      <Form ref="member" :model="member" :rules="ruleValidate" label-position="left">
+      <Form
+        ref="membervalidate"
+        :model="membervalidate"
+        :rules="ruleValidate"
+        label-position="left"
+      >
         <!-- Frist Name -->
-        <FormItem label="Frist Name" prop="address">
-          <Input v-model="member.first_name" placeholder="Enter your firstname" />
+        <FormItem label="Frist Name" prop="name">
+          <Input v-model="membervalidate.name" placeholder="Enter your firstname" text />
         </FormItem>
 
         <!-- Last Name -->
-        <FormItem label="Frist Name" prop="address">
-          <Input v-model="member.last_name" placeholder="Enter your lastname" />
+        <FormItem label="Frist Name" prop="name2">
+          <Input
+            v-model="membervalidate.name2"
+            placeholder="Enter your lastname"
+            required="required"
+          />
         </FormItem>
 
         <!-- Email -->
-        <FormItem label="E-mail" prop="mail">
-          <Input v-model="member.mail" placeholder="Enter your e-mail" />
+        <FormItem label="E-mail" prop="email">
+          <Input v-model="membervalidate.email" placeholder="Enter your e-mail" />
         </FormItem>
 
         <!-- Phone -->
         <FormItem label="Phone" prop="phone">
           <Input
-            v-model="member.phone"
+            v-model="membervalidate.phone"
             maxlength="11"
             show-word-limit
             placeholder="Enter your Phone Number"
@@ -41,7 +50,7 @@
         <!-- Age -->
         <FormItem label="Age" prop="age">
           <Input
-            v-model="member.age"
+            v-model="membervalidate.age"
             placeholder="Enter your name"
             maxlength="3"
             minlength="1"
@@ -51,13 +60,13 @@
 
         <!-- Address -->
         <FormItem label="Address" prop="address">
-          <Input v-model="member.address" placeholder="Enter your address"></Input>
+          <Input v-model="membervalidate.address" placeholder="Enter your address"></Input>
         </FormItem>
 
         <!-- EVENT -->
         <FormItem>
-          <Button type="primary" @click="handleOK('member')">Create User</Button>
-          <Button @click="handleCancel('member')" style="margin-left: 8px">Reset</Button>
+          <Button type="primary" @click="handleOK('membervalidate')">Create User</Button>
+          <Button @click="handleCancel('membervalidate')" style="margin-left: 8px">Reset</Button>
         </FormItem>
       </Form>
 
@@ -73,9 +82,36 @@ import db from "@/db";
 export default {
   name: "modalinsert-component",
   data() {
+    // eslint-disable-next-line consistent-return
+    //  const validateName = (rule, value, callback) => {
+    //    if (!value) {
+    //      return callback(new Error("Age cannot be empty"));
+    //    }
+
+    //    setTimeout(() => {
+    //      callback();
+    //    }, 1000);
+    //  };
+    const validateEmail = (rule, value, callback) => {
+      const regex = /\S+@\S+\.\S+/;
+      if (regex.test(value)) {
+        callback();
+      } else {
+        callback(new Error("Please enter your Email Format "));
+      }
+    };
     return {
       modal1: false,
       footerHide: true,
+      membervalidate: {
+        name: "",
+        name2: "",
+        phone: "",
+        age: 0,
+        address: "",
+        id: "",
+        email: ""
+      },
       member: {
         first_name: "",
         last_name: "",
@@ -83,10 +119,13 @@ export default {
         age: 0,
         address: "",
         id: "",
-        mail: ""
+        email: ""
       },
+      mail: "",
       ruleValidate: {
-        emty: [{ required: true, message: "The address cannot be empty", trigger: "blur" }],
+        name: [{ required: true, message: "The Frist name cannot be empty", trigger: "blur" }],
+        name2: [{ required: true, message: "The Last name cannot be empty", trigger: "blur" }],
+        email: [{ required: true, validator: validateEmail, trigger: "blur" }],
         phone: [{ required: true, message: "The Phone cannot be empty", trigger: "blur" }],
         age: [{ required: true, message: "The age cannot be empty", trigger: "blur" }],
         mail: [
@@ -99,7 +138,12 @@ export default {
   },
   methods: {
     handleOK(name) {
+      this.member = { ...this.member, ...this.membervalidate };
+      this.member.first_name = this.membervalidate.name;
+      this.member.last_name = this.membervalidate.name2;
+
       this.member.id = uuidv4();
+
       this.$refs[name].validate(valid => {
         if (valid) {
           this.$Message.success("Success!");

@@ -98,7 +98,7 @@ export default {
   methods: {
     handleOK() {
       db.collection("users")
-        .doc(`${this.member.id}`)
+        .doc(this.member.id)
         .set(this.member)
         .then(() => {
           this.updateUsersStroe(this.positionArray, this.member);
