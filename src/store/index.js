@@ -24,10 +24,7 @@ export default new Vuex.Store({
 
     //  SET Users in Users
     SET_USERS(state, payload) {
-      state.Users = {
-        ...state.Users,
-        ...payload
-      };
+      state.Users = [...state.Users, ...payload];
     }
   },
   actions: {
