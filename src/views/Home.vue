@@ -3,7 +3,6 @@
     <Layout>
       <Header class="navber"><Navber /></Header>
       <Content class="content"> <Member /></Content>
-      <Footer>Footer</Footer>
     </Layout>
   </div>
 </template>

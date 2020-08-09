@@ -116,7 +116,6 @@ export default {
       this.$refs[name].resetFields();
     },
     saveData() {
-      console.log(this.member.id);
       db.collection("users")
         .doc(this.member.id)
         .set(this.member)
