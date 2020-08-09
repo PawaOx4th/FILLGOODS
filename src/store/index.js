@@ -21,12 +21,13 @@ export default new Vuex.Store({
     SET_PROFILE_EMAIL(state, payload) {
       state.Profile.email = payload;
     },
+
+    //  SET Users in Users
     SET_USERS(state, payload) {
       state.Users = {
         ...state.Users,
         ...payload
       };
-      console.log("SET_USERS -> payload", payload);
     }
   },
   actions: {
@@ -34,6 +35,7 @@ export default new Vuex.Store({
     setProfileEmail({ commit }, data) {
       commit("SET_PROFILE_EMAIL", data);
     },
+
     //  SET User data
     setUsers({ commit }, data) {
       commit("SET_USERS", data);

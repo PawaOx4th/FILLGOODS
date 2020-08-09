@@ -1,15 +1,19 @@
 <template>
   <div id="home-page" class="home">
-    <img alt="Vue logo" src="../assets/logo.png" />
-    <p>{{ Profile.email }}</p>
-    <br />
+    <Layout>
+      <Header class="navber"><Navber /></Header>
+      <Content>Content</Content>
+      <Footer>Footer</Footer>
+    </Layout>
   </div>
 </template>
 
 <script>
 export default {
   name: "home-page",
-  components: {},
+  components: {
+    Navber: () => import("@/components/Navber.vue")
+  },
   data() {
     return {
       Profile: {
@@ -17,21 +21,14 @@ export default {
       }
     };
   },
-  mounted() {
-    //   แสดง E-mail
-    this.Profile.email = this.$store.getters.getProfileEmail;
-  },
-  methods: {
-    async testDB() {
-      // db.collection("users")
-      //   .add(mockData)
-      //   .then(() => {
-      //     console.log("testDB -> this.Profile", this.Profile);
-      //   })
-      //   .catch(err => {
-      //     console.log("testDB -> err", err);
-      //   });
-    }
-  }
+  mounted() {},
+  methods: {}
 };
 </script>
+<style lang="scss">
+.navber {
+  background-color: #1a936f;
+  width: 100%;
+  padding: 0 0;
+}
+</style>

@@ -78,7 +78,7 @@ export default {
         .then(data => {
           this.fetchData();
           this.$store.dispatch("setProfileEmail", data.user.email);
-          this.$Message.success("Success!");
+          this.$Message.success("Sign in Success!");
           this.$router.replace({ name: "Home" });
         })
         .catch(error => {
@@ -88,7 +88,6 @@ export default {
     },
     async fetchData() {
       const snapshot = await db.collection("users").get();
-
       const collection = {};
       snapshot.forEach(doc => {
         collection[doc.id] = doc.data();
