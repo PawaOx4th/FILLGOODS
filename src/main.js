@@ -1,5 +1,6 @@
 import Vue from "vue";
 import firebase from "firebase/app";
+import VueFirestore from "vue-firestore";
 import App from "./App.vue";
 import "./registerServiceWorker";
 import router from "./router";
@@ -20,9 +21,10 @@ const firebaseConfig = {
 };
 
 firebase.initializeApp(firebaseConfig);
+Vue.use(VueFirestore);
 
 new Vue({
   router,
   store,
-  render: (h) => h(App)
+  render: h => h(App)
 }).$mount("#app");

@@ -1,18 +1,49 @@
 <template>
-  <div class="home">
+  <div id="home-page" class="home">
     <img alt="Vue logo" src="../assets/logo.png" />
-    <HelloWorld msg="Welcome to Your Vue.js App" />
+    <p>{{ Profile.email }}</p>
+    <br />
+    <Button type="success" @click="testDB">test save</Button>
   </div>
 </template>
 
 <script>
-// @ is an alias to /src
-import HelloWorld from "@/components/HelloWorld.vue";
+// import { db } from "firebase/firebase-firestore";
+import db from "@/db";
 
 export default {
-  name: "Home",
-  components: {
-    HelloWorld
+  name: "home-page",
+  components: {},
+  data() {
+    return {
+      Profile: {
+        email: ""
+      }
+    };
+  },
+  mounted() {
+    //   แสดง E-mail
+    this.Profile.email = this.$store.getters.getProfileEmail;
+  },
+  methods: {
+    //  addReptile() {
+    //    this.$firestore.reptiles.add({
+    //      name: this.newReptile,
+    //      timestamp: new Date()
+    //    });
+    //    this.newReptile = "";
+    //  }
+    testDB() {
+      db.collection("users")
+        .doc(this.Profile.email)
+        .set(this.Profile)
+        .then(() => {
+          console.log("testDB -> this.Profile", this.Profile);
+        })
+        .catch(err => {
+          console.log("testDB -> err", err);
+        });
+    }
   }
 };
 </script>

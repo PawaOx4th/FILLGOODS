@@ -1,5 +1,6 @@
 <template>
   <div id="login-page">
+    <Button type="success" ghost @click="setData">Dashed</Button>
     <Layout>
       <Content>
         <Row type="flex" justify="center" align="middle" class-name="row">
@@ -16,6 +17,7 @@
                   v-model="formValidate.password"
                   placeholder="Password"
                   maxlength="12"
+                  on-enter="loginWithEmail"
                 >
                   <Icon type="ios-lock-outline" slot="prepend"></Icon>
                 </Input>
@@ -64,21 +66,17 @@ export default {
     };
   },
   methods: {
-    //  handleSubmit(name) {
-    //    this.$refs[name].validate(valid => {
-    //      if (valid) {
-    //        this.$Message.success("Success!");
-    //      } else {
-    //        this.$Message.error("Fail!");
-    //      }
-    //    });
-    //  },
+    setData() {
+      this.formValidate.mail = "a@gmail.com";
+      this.formValidate.password = "123456";
+    },
     loginWithEmail() {
       firebase
         .auth()
         .signInWithEmailAndPassword(this.formValidate.mail, this.formValidate.password)
         .then(data => {
-          console.log(data);
+          //  console.log("loginWithEmail -> data", data.user.email);
+          this.$store.dispatch("setProfileEmail", data.user.email);
           this.$Message.success("Success!");
           this.$router.replace({ name: "Home" });
         })
