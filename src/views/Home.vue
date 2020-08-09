@@ -34,7 +34,7 @@ export default {
 }
 
 .content {
-  min-height: calc(100vh * 0.87);
+  min-height: 100vh;
   min-width: 100%;
 }
 </style>
