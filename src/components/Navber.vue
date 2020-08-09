@@ -7,7 +7,7 @@
             <p>{{ userLogin }}</p>
           </Col>
           <Col :xs="18" :md="6" :lg="12" class="nav__btn">
-            <p>Sign out</p>
+            <SignOut />
           </Col>
         </Row>
       </Header>
@@ -18,6 +18,9 @@
 <script>
 export default {
   name: "navber-component",
+  components: {
+    SignOut: () => import("@/components/SignOut.vue")
+  },
   computed: {
     userLogin() {
       return this.$store.getters.getProfileEmail;

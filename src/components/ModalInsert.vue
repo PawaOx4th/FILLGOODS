@@ -1,6 +1,14 @@
 <template>
   <div id="modalinsert-component">
-    <Button type="info" @click="modal1 = true" class="btn">Create User</Button>
+    <Button
+      type="info"
+      @click="modal1 = true"
+      class="btn"
+      size="large"
+      shape="circle"
+      icon="ios-color-wand-outline"
+      >Create User</Button
+    >
     <Modal v-model="modal1" title="" :footer-hide="footerHide">
       <!--  -->
       <br />

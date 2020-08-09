@@ -10,14 +10,14 @@ import "./plugins/iview";
 Vue.config.productionTip = false;
 
 const firebaseConfig = {
-  apiKey: "AIzaSyCbRo2VfrAOg01a5KVpconZAR_ncbRGzWs",
-  authDomain: "fillgoods-test.firebaseapp.com",
-  databaseURL: "https://fillgoods-test.firebaseio.com",
-  projectId: "fillgoods-test",
-  storageBucket: "fillgoods-test.appspot.com",
-  messagingSenderId: "420960601389",
-  appId: "1:420960601389:web:1abbafd5d07c2279c73fa4",
-  measurementId: "G-3W841JHWG2"
+  apiKey: process.env.VUE_APP_API_KEY,
+  authDomain: process.env.VUE_APP_AUTH_DOMAIN,
+  databaseURL: process.env.VUE_APP_DATABASE_URL,
+  projectId: process.env.VUE_APP_PROJECT_ID,
+  storageBucket: process.env.VUE_APP_STORAGE_BUSKET,
+  messagingSenderId: process.env.VUE_APP_MESSAGINSENDERID,
+  appId: process.env.VUE_APP_APP_ID,
+  measurementId: process.env.VUE_APP_MEASUREMENT_ID
 };
 
 firebase.initializeApp(firebaseConfig);

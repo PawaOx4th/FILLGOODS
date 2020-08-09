@@ -1,11 +1,13 @@
 <template>
   <div id="mamber">
-    <Row type="flex" justify="end" align="middle" class="row__btn">
-      <Col span="24" type="flex">
-        <ButtonInsert />
+    <Row type="flex" justify="center">
+      <Col span="24" class="btnCreate">
+        <div class="conteiner">
+          <ButtonInsert @updateCard="updateCard" />
+        </div>
       </Col>
     </Row>
-    <Row :gutter="16" type="flex" justify="start" align="middle" class-name="row__card">
+    <Row :gutter="32" type="flex" justify="start" align="middle" class-name="row__card">
       <Col :xs="24" :sm="6" :md="6" :lg="4" v-for="(member, index) in members" :key="index">
         <Card
           :name="member.first_name"
@@ -53,9 +55,15 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.row__btn {
+.btnCreate {
   margin: 1rem 0 0 0;
-  padding: 0.5rem;
+
+  .conteiner {
+    display: flex;
+    justify-content: flex-end;
+    width: 95%;
+    margin: 0 auto;
+  }
 }
 .row__card {
   padding: 2rem;

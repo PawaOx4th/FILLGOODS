@@ -1,10 +1,10 @@
 <template>
   <div id="login-page">
-    <Button type="success" ghost @click="setData">Dashed</Button>
     <Layout>
       <Content>
         <Row type="flex" justify="center" align="middle" class-name="row">
           <Col :xs="16" :md="6">
+            <h1>Sign In</h1>
             <Form ref="formInline" :model="formValidate" :rules="ruleInline">
               <FormItem prop="mail">
                 <Input v-model="formValidate.mail" placeholder="Enter your e-mail">
@@ -67,10 +67,6 @@ export default {
     };
   },
   methods: {
-    setData() {
-      this.formValidate.mail = "a@gmail.com";
-      this.formValidate.password = "123456";
-    },
     loginWithEmail() {
       firebase
         .auth()
@@ -101,7 +97,7 @@ export default {
 
   .row {
     height: 100%;
-
+    text-align: center;
     .btn {
       margin: 0.8rem 0 0 0;
       width: 100%;
