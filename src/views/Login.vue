@@ -38,6 +38,7 @@
 <script>
 import * as firebase from "firebase/app";
 import "firebase/auth";
+import db from "@/db";
 
 export default {
   name: "login-page",
@@ -75,7 +76,7 @@ export default {
         .auth()
         .signInWithEmailAndPassword(this.formValidate.mail, this.formValidate.password)
         .then(data => {
-          //  console.log("loginWithEmail -> data", data.user.email);
+          this.fetchData();
           this.$store.dispatch("setProfileEmail", data.user.email);
           this.$Message.success("Success!");
           this.$router.replace({ name: "Home" });
@@ -84,6 +85,15 @@ export default {
           this.$Message.error("Fail!");
           this.error = error;
         });
+    },
+    async fetchData() {
+      const snapshot = await db.collection("users").get();
+
+      const collection = {};
+      snapshot.forEach(doc => {
+        collection[doc.id] = doc.data();
+      });
+      this.$store.dispatch("setUsers", collection);
     }
   }
 };
